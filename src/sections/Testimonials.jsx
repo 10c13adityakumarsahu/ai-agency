@@ -27,10 +27,17 @@ const Testimonials = () => {
     return (
         <section className="py-32 overflow-hidden bg-black/50">
             <div className="container mx-auto px-6 mb-20">
-                <span className="text-white/30 text-[10px] font-black uppercase tracking-[0.4em]">Validation</span>
-                <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter mt-4">
-                    Trusted By <span className="text-gradient">Industry Leaders</span>
-                </h2>
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                >
+                    <span className="text-white/30 text-[10px] font-black uppercase tracking-[0.4em]">Validation</span>
+                    <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter mt-4">
+                        Trusted By <span className="text-gradient">Industry Leaders</span>
+                    </h2>
+                </motion.div>
             </div>
 
             <div className="flex relative items-center">

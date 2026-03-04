@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
 import Lenis from '@studio-freight/lenis'
 import Hero from './sections/Hero'
 import Services from './sections/Services'
@@ -12,6 +13,13 @@ import Footer from './sections/Footer'
 import Navbar from './components/Navbar'
 
 function App() {
+    const { scrollYProgress } = useScroll()
+    const scaleX = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    })
+
     useEffect(() => {
         const lenis = new Lenis({
             duration: 1.2,
@@ -38,23 +46,31 @@ function App() {
     }, [])
 
     return (
-        <div className="relative min-h-screen bg-[#050505]">
+        <div className="relative min-h-screen bg-[#050505] selection:bg-electric-green selection:text-black">
             {/* Background Grid */}
             <div className="fixed inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
+
+            {/* Scroll Progress Bar */}
+            <motion.div
+                className="fixed top-0 left-0 right-0 h-[2px] bg-electric-green z-[100] origin-left"
+                style={{ scaleX }}
+            />
 
             {/* Navigation */}
             <Navbar />
 
             <main>
                 <Hero />
-                <Services />
-                <CaseStudies />
-                <Capabilities />
-                <Process />
-                <Team />
-                <Testimonials />
-                <div className="py-20 md:py-32">
-                    <CTA />
+                <div className="relative z-10">
+                    <Services />
+                    <CaseStudies />
+                    <Capabilities />
+                    <Process />
+                    <Team />
+                    <Testimonials />
+                    <div className="py-20 md:py-32">
+                        <CTA />
+                    </div>
                 </div>
             </main>
 
